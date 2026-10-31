@@ -1,1 +1,0 @@
-a = nome_usuário
