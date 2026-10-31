@@ -1,1 +1,84 @@
-<h1> Olá, guys!!!</h1>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Aplicativo de Uma Tela</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #output {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            min-height: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Meu App</h2>
+        <p>Digite algo abaixo:</p>
+        
+        <!-- Área de Entrada -->
+        <input type="text" id="userInput" placeholder="Escreva aqui...">
+        <button onclick="processarTexto()">Processar</button>
+        
+        <!-- Área de Saída -->
+        <div id="output">O resultado aparecerá aqui...</div>
+    </div>
+
+    <script>
+        function processarTexto() {
+            // Pega o valor digitado pelo usuário
+            const texto = document.getElementById("userInput").value;
+            
+            // Exemplo simples: transformar o texto em maiúsculas e mostrar na saída
+            const resultado = texto ? `Você digitou: ${texto.toUpperCase()}` : "Por favor, digite alguma coisa!";
+            
+            // Mostra o resultado na tela
+            document.getElementById("output").innerText = resultado;
+        }
+    </script>
+
+</body>
+</html>
