@@ -200,8 +200,38 @@
             const outputContainer = document.getElementById('output-container');
 
             if (!secret || !message) {
-                alert('Ihhh, deu ruim... você preencheu tudo certinho?');
+                alert('Por favor, preencha tanto o termo secreto quanto a mensagem!');
                 return;
             }
 
             outputContainer.style.display = 'block';
+
+            if (acao === 'cifrar') {
+                try {
+                    let result = '';
+                    for (let i = 0; i < message.length; i++) {
+                        let charCode = message.charCodeAt(i) ^ secret.charCodeAt(i % secret.length);
+                        result += String.fromCharCode(charCode);
+                    }
+                    outputDiv.innerText = btoa(result);
+                } catch (e) {
+                    outputDiv.innerText = 'Erro ao cifrar a mensagem.';
+                }
+            } else {
+                try {
+                    let decodedBase64 = atob(message);
+                    let result = '';
+                    for (let i = 0; i < decodedBase64.length; i++) {
+                        let charCode = decodedBase64.charCodeAt(i) ^ secret.charCodeAt(i % secret.length);
+                        result += String.fromCharCode(charCode);
+                    }
+                    outputDiv.innerText = result;
+                } catch (e) {
+                    outputDiv.innerText = 'Erro: Senha incorreta ou texto cifrado inválido!';
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
