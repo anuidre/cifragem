@@ -22,27 +22,62 @@
             padding: 20px;
         }
         h1 {
-            font-size: 3rem;
+            font-size: 4rem;
             font-style: italic;
             font-weight: 300;
-            margin-bottom: 5px;
+            margin-bottom: 0px;
+            margin-top: -30px;
             letter-spacing: -1px;
-        }
-        h1 span {
-            font-size: 1rem;
-            font-style: normal;
-            opacity: 0.8;
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
         }
         .subtitle {
             font-size: 1.1rem;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             opacity: 0.9;
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
+        .subtitle strong {
+            font-weight: 600;
+            color: #ffffff;
         }
         .input-group {
             display: flex;
             flex-direction: column;
             gap: 15px;
             align-items: center;
+        }
+        .password-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+        }
+        .password-wrapper input {
+            width: 100%;
+            padding-right: 45px;
+            box-sizing: border-box;
+        }
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #b0b0b0;
+            font-size: 1.1rem;
+            padding: 0;
+        }
+        .toggle-password:hover {
+            color: #ffffff;
         }
         input, textarea {
             width: 100%;
@@ -121,12 +156,15 @@
 <body>
 
     <div class="container">
-        <h1>Cifragem<span>.com.br</span></h1>
-        <p class="subtitle">Já quis (des)criptografar uma mensagem usando um termo secreto?</p>
+        <h1>Cifragem</h1>
+        <p class="subtitle">Já quis <strong>(des)criptografar</strong> uma <strong>mensagem</strong> usando um <strong>termo secreto</strong>?</p>
         
         <div class="input-group">
-            <!-- Campo do Termo Secreto / Senha -->
-            <input type="password" id="secretTerm" placeholder="Digite o termo...">
+            <!-- Campo do Termo Secreto com o Olhinho -->
+            <div class="password-wrapper">
+                <input type="password" id="secretTerm" placeholder="Digite o termo...">
+                <button type="button" class="toggle-password" id="toggleBtn" onclick="toggleSenha()">👁️</button>
+            </div>
             
             <!-- Campo da Mensagem -->
             <textarea id="messageInput" placeholder="Digite a mensagem..."></textarea>
@@ -147,6 +185,18 @@
     </div>
 
     <script>
+        function toggleSenha() {
+            const passwordInput = document.getElementById('secretTerm');
+            const toggleBtn = document.getElementById('toggleBtn');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleBtn.innerText = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                toggleBtn.innerText = '👁️';
+            }
+        }
+
         function executarCriptografia(acao) {
             const secret = document.getElementById('secretTerm').value;
             const message = document.getElementById('messageInput').value;
@@ -167,7 +217,7 @@
                         let charCode = message.charCodeAt(i) ^ secret.charCodeAt(i % secret.length);
                         result += String.fromCharCode(charCode);
                     }
-                    outputDiv.innerText = btoa(result); // Codifica em base64 para exibição limpa
+                    outputDiv.innerText = btoa(result);
                 } catch (e) {
                     outputDiv.innerText = 'Erro ao cifrar a mensagem.';
                 }
