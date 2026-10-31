@@ -14,6 +14,7 @@
             align-items: center;
             min-height: 100vh;
             color: #ffffff;
+            overflow-x: hidden;
         }
         .container {
             text-align: center;
@@ -25,24 +26,19 @@
             font-size: 4rem;
             font-style: italic;
             font-weight: 300;
-            margin-bottom: 0px;
-            margin-top: -30px;
+            margin-bottom: 5px;
+            margin-top: -70px; /* Mais acima na tela */
             letter-spacing: -1px;
             width: 100%;
-            max-width: 450px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: left;
+            text-align: center; /* Centralizado horizontalmente */
         }
         .subtitle {
-            font-size: 1.1rem;
-            margin-bottom: 25px;
+            font-size: 1.05rem;
+            margin-bottom: 30px;
             opacity: 0.9;
             width: 100%;
-            max-width: 450px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: left;
+            text-align: center; /* Centralizado horizontalmente */
+            white-space: nowrap; /* Mantém em uma só linha */
         }
         .subtitle strong {
             font-weight: 600;
@@ -204,38 +200,8 @@
             const outputContainer = document.getElementById('output-container');
 
             if (!secret || !message) {
-                alert('Por favor, preencha tanto o termo secreto quanto a mensagem!');
+                alert('Ihhh, deu ruim... você preencheu tudo certinho?');
                 return;
             }
 
             outputContainer.style.display = 'block';
-
-            if (acao === 'cifrar') {
-                try {
-                    let result = '';
-                    for (let i = 0; i < message.length; i++) {
-                        let charCode = message.charCodeAt(i) ^ secret.charCodeAt(i % secret.length);
-                        result += String.fromCharCode(charCode);
-                    }
-                    outputDiv.innerText = btoa(result);
-                } catch (e) {
-                    outputDiv.innerText = 'Erro ao cifrar a mensagem.';
-                }
-            } else {
-                try {
-                    let decodedBase64 = atob(message);
-                    let result = '';
-                    for (let i = 0; i < decodedBase64.length; i++) {
-                        let charCode = decodedBase64.charCodeAt(i) ^ secret.charCodeAt(i % secret.length);
-                        result += String.fromCharCode(charCode);
-                    }
-                    outputDiv.innerText = result;
-                } catch (e) {
-                    outputDiv.innerText = 'Erro: Senha incorreta ou texto cifrado inválido!';
-                }
-            }
-        }
-    </script>
-
-</body>
-</html>
